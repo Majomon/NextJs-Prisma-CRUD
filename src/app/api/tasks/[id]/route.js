@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { prisma } from "@/app/libs/prisma";
+import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
   const task = await prisma.task.findUnique({
@@ -17,6 +17,7 @@ export async function PUT(request, { params }) {
       where: {
         id: Number(params.id),
       },
+      //Al devolver data puedo modificar parcial o totalmente la información
       data: data,
     });
     return NextResponse.json(taskUpdate);
