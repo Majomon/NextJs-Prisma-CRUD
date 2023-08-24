@@ -9,6 +9,8 @@ async function loadTask() {
   return tasks;
 }
 
+export const revalidate = 5;
+
 async function HomePage() {
   const tasks = await loadTask();
   return (
