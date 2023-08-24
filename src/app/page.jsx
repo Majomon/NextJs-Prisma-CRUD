@@ -11,12 +11,18 @@ async function loadTask() {
 
 export const revalidate = 5;
 
-async function HomePage() {
+export async function getServerSideProps() {
   const tasks = await loadTask();
+  return {
+    props: { tasks },
+  };
+}
+
+function HomePage({ tasks }) {
   return (
     <section className="container mx-auto">
       <div className="grid grid-cols-3 gap-3 mt-10">
-        {tasks.map((task) => (
+        {tasks && tasks.map((task) => (
           <TaskCard task={task} key={task.id} />
         ))}
       </div>
@@ -24,4 +30,6 @@ async function HomePage() {
   );
 }
 
+
 export default HomePage;
+
