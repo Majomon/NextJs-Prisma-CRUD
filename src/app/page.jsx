@@ -8,21 +8,16 @@ async function loadTask() {
   const tasks = await prisma.task.findMany();
   return tasks;
 }
+/* Poner esto en produccion. No es necesario cuando esta en desarrollo */
+/* export const revalidate = 5; */
+export const dynamic = "force-dynamic";
 
-export const revalidate = 5;
-
-export async function getServerSideProps() {
+async function HomePage() {
   const tasks = await loadTask();
-  return {
-    props: { tasks },
-  };
-}
-
-function HomePage({ tasks }) {
   return (
     <section className="container mx-auto">
       <div className="grid grid-cols-3 gap-3 mt-10">
-        {tasks && tasks.map((task) => (
+        {tasks.map((task) => (
           <TaskCard task={task} key={task.id} />
         ))}
       </div>
@@ -30,6 +25,4 @@ function HomePage({ tasks }) {
   );
 }
 
-
 export default HomePage;
-
