@@ -1,0 +1,6 @@
+Para luego de colocar la configuracion de prisma se debe ejecutar esto: npx prisma migrate dev
+Colocar esto en script:     "postinstall": "prisma generate"
+Despues: npx prisma generate
+
+
+
